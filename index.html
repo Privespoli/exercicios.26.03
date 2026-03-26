@@ -1,12 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mi Dibujador de Figuras</title>
 </head>
 <body>
-    
+
+    <h2>Dibujador de Asteriscos</h2>
+
+    <label>Tamaño del lado:</label>
+    <input type="number" id="lado" value="5">
+    <br><br>
+
+    <button onclick="dibujar('cuadrado')">Dibujar Cuadrado</button>
+    <button onclick="dibujar('triangulo')">Dibujar Triángulo</button>
+
+    <pre id="resultado"></pre>
+
+    <hr> <h3>Ordenador de Números</h3>
+<input type="text" id="listaNumeros" placeholder="Ej: 5,2,8,1">
+<button onclick="ejecutarOrdenacion('Asc')">Orden Ascendente</button>
+<button onclick="ejecutarOrdenacion('Desc')">Orden Descendente</button>
+
+<p id="resultadoOrden"></p>
 
     <script src="/java.js"></script>
 </body>
