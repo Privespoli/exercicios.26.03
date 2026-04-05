@@ -92,6 +92,7 @@ function ejecutarMarco() {
     document.getElementById("resultadoMarco").innerText = crearMarco(frase);
 }
 
+// Segundo maior
 function buscarSegundoMasGrande(lista) {
     let max = -Infinity; // Empezamos con el número más bajo posible
     let segundoMax = -Infinity;
@@ -117,4 +118,129 @@ function ejecutarSegundoGrande() {
     let resultado = buscarSegundoMasGrande(numeros);
     
     document.getElementById("resultadoSegundo").innerText = "El segundo más grande es: " + resultado;
+}
+
+// pokémon
+function calcularDano(tipoAtacante, tipoDefensor, ataque, defensa) {
+    let efectividad = 1;
+
+    // Lógica de efectividades
+    if (tipoAtacante === tipoDefensor) {
+        efectividad = 0.5; // Mismo tipo suele ser poco efectivo
+    } else if (tipoAtacante === "Fuego") {
+        if (tipoDefensor === "Planta") efectividad = 2;
+        if (tipoDefensor === "Agua") efectividad = 0.5;
+    } else if (tipoAtacante === "Agua") {
+        if (tipoDefensor === "Fuego") efectividad = 2;
+        if (tipoDefensor === "Planta" || tipoDefensor === "Eléctrico") efectividad = 0.5;
+    } else if (tipoAtacante === "Planta") {
+        if (tipoDefensor === "Agua") efectividad = 2;
+        if (tipoDefensor === "Fuego") efectividad = 0.5;
+    } else if (tipoAtacante === "Eléctrico") {
+        if (tipoDefensor === "Agua") efectividad = 2;
+        if (tipoDefensor === "Planta") efectividad = 0.5;
+    }
+
+    // Fórmula: daño = 50 * (ataque / defensa) * efectividad
+    let dano = 50 * (ataque / defensa) * efectividad;
+    return Math.round(dano);
+}
+
+function ejecutarBatalla() {
+    // 1. Obtener valores
+    let atacante = document.getElementById("tipoAtacante").value;
+    let defensor = document.getElementById("tipoDefensor").value;
+    let atk = parseFloat(document.getElementById("puntosAtaque").value);
+    let def = parseFloat(document.getElementById("puntosDefensa").value);
+
+    // 2. Validar que los números estén entre 1 y 100
+    if (atk < 1 || atk > 100 || def < 1 || def > 100) {
+        document.getElementById("resultadoPokemon").innerText = "Error: Ataque y Defensa deben estar entre 1 y 100.";
+        return;
+    }
+
+    // 3. Calcular y mostrar
+    let resultado = calcularDano(atacante, defensor, atk, def);
+    document.getElementById("resultadoPokemon").innerText = 
+        `Un ataque de tipo ${atacante} contra ${defensor} causa ${resultado} puntos de daño.`;
+}
+
+// colocar maiúscila #17
+function capitalizarFrase(texto) {
+    if (!texto) return ""; // Validación por si el texto está vacío
+
+    let resultado = "";
+    let nuevaPalabra = true; // Flag para saber si la siguiente letra debe ser mayúscula
+
+    for (let i = 0; i < texto.length; i++) {
+        let caracterActual = texto[i];
+
+        if (caracterActual === " ") {
+            resultado += " ";
+            nuevaPalabra = true; // El siguiente carácter será el inicio de una palabra
+        } else {
+            if (nuevaPalabra) {
+                // Convertimos a mayúscula manualmente la primera letra
+                resultado += caracterActual.toUpperCase();
+                nuevaPalabra = false;
+            } else {
+                // El resto de la palabra se queda en minúscula (opcional, según tu lógica)
+                resultado += caracterActual.toLowerCase();
+            }
+        }
+    }
+    return resultado;
+}
+
+// encontrar mais vogais
+function ejecutarCapitalizar() {
+    let input = document.getElementById("textoOriginal").value;
+    let resultado = capitalizarFrase(input);
+    document.getElementById("resultadoCapitalizado").innerText = "Resultado: " + resultado;
+}
+
+function encontrarVocalMasRepetida(texto) {
+    // 1. Definimos las vocales y un contador
+    const vocales = "aeiou";
+    let contadores = { 'a': 0, 'e': 0, 'i': 0, 'o': 0, 'u': 0 };
+    let hayVocales = false;
+
+    // 2. Normalizamos el texto (minúsculas) y recorremos
+    let textoLimpio = texto.toLowerCase();
+
+    for (let letra of textoLimpio) {
+        // Manejo de casos especiales (tildes)
+        if (letra === 'a') { contadores['a']++; hayVocales = true; }
+        else if (letra === 'e') { contadores['e']++; hayVocales = true; }
+        else if (letra === 'i') { contadores['i']++; hayVocales = true; }
+        else if (letra === 'o') { contadores['o']++; hayVocales = true; }
+        else if (letra === 'u') { contadores['u']++; hayVocales = true; }
+    }
+
+    if (!hayVocales) return "";
+
+    // 3. Buscamos cuál tiene el número más alto
+    let maxRepeticiones = 0;
+    let vocalGanadora = "";
+
+    for (let v in contadores) {
+        if (contadores[v] > maxRepeticiones) {
+            maxRepeticiones = contadores[v];
+            vocalGanadora = v;
+        }
+    }
+
+    return vocalGanadora;
+}
+
+// Conexión con la interfaz
+function ejecutarVocal() {
+    let frase = document.getElementById("textoVocales").value;
+    let vocal = encontrarVocalMasRepetida(frase);
+    
+    if (vocal === "") {
+        document.getElementById("resultadoVocal").innerText = "Não tem vogal";
+    } else {
+        document.getElementById("resultadoVocal").innerText = "A vogal mais repetida é: " + vocal.toUpperCase();
+    }
 }

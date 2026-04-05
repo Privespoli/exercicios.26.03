@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mi Dibujador de Figuras</title>
+    <title>Desenhar figuras</title>
 </head>
 <body>
 
@@ -18,8 +18,8 @@
 
     <hr> <h3>Ordenador de Números</h3>
 <input type="text" id="listaNumeros" placeholder="Ej: 5,2,8,1">
-<button onclick="ejecutarOrdenacion('Asc')">Orden Ascendente</button>
-<button onclick="ejecutarOrdenacion('Desc')">Orden Descendente</button>
+<button onclick="ejecutarOrdenacion('Asc')">Ordem Ascendente</button>
+<button onclick="ejecutarOrdenacion('Desc')">Ordem Descendente</button>
 
 <p id="resultadoOrden"></p>
 
@@ -34,6 +34,45 @@
 <input type="text" id="listaParaSegundo" placeholder="Ej: 5, 12, 8, 20">
 <button onclick="ejecutarSegundoGrande()">Calcular</button>
 <p id="resultadoSegundo"></p>
+
+
+<hr>
+<h3>Calculadora de Daño Pokémon</h3>
+<label>Atacante:</label>
+<select id="tipoAtacante">
+    <option value="Fuego">Fuego</option>
+    <option value="Agua">Agua</option>
+    <option value="Planta">Planta</option>
+    <option value="Eléctrico">Eléctrico</option>
+</select>
+
+<label>Defensor:</label>
+<select id="tipoDefensor">
+    <option value="Fuego">Fuego</option>
+    <option value="Agua">Agua</option>
+    <option value="Planta">Planta</option>
+    <option value="Eléctrico">Eléctrico</option>
+</select>
+<br><br>
+<label>Ataque (1-100):</label>
+<input type="number" id="puntosAtaque" value="50" min="1" max="100">
+<label>Defensa (1-100):</label>
+<input type="number" id="puntosDefensa" value="50" min="1" max="100">
+<br><br>
+<button onclick="ejecutarBatalla()">Calcular Daño - Pokémon</button>
+<p id="resultadoPokemon"></p>
+
+<hr>
+<h3>Maiúscula</h3>
+<input type="text" id="textoOriginal" placeholder="escreva sua frase">
+<button onclick="ejecutarCapitalizar()">Maiúscula</button>
+<p id="resultadoCapitalizado"></p>
+
+<hr>
+<h3>Vogal mais frequente</h3>
+<input type="text" id="textoVocales" placeholder="Escreva aqui">
+<button onclick="ejecutarVocal()">Encontrar Vogal</button>
+<p id="resultadoVocal"></p>
 
     <script src="/java.js"></script>
 </body>
